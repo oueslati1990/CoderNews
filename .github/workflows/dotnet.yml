@@ -18,7 +18,5 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
-      env:
-        TOKEN_KEY : ${{secrets.TOKEN_KEY}}
       run: dotnet build --no-restore
    
