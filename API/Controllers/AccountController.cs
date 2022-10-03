@@ -26,6 +26,11 @@ namespace API.Controllers
             _tokenService = tokenService;
         }
 
+        /// <summary>
+        /// register in the app
+        /// </summary>
+        /// <param name="registerDto"></param>
+        /// <returns></returns>
         [HttpPost("register")]
         public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
         {
@@ -51,6 +56,11 @@ namespace API.Controllers
             };
         }
 
+        /// <summary>
+        /// login to the app
+        /// </summary>
+        /// <param name="loginDto"></param>
+        /// <returns></returns>
         [HttpPost("login")]
         public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
         {
