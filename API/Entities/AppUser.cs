@@ -14,7 +14,7 @@ namespace API.Entities
         public string Email { get; set; }
         public byte[] PasswordHash { get; set; }
         public byte[] PasswordSalt { get; set; }
-        public List<Post> Posts { get; set; }
+        public List<PostDto> Posts { get; set; }
         public List<Like> Likes { get; set; }
         public List<Comment> Comments { get; set; }
     }

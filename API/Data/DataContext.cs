@@ -14,7 +14,7 @@ namespace API.Data
         }
 
         public DbSet<AppUser> Users { get; set; }
-        public DbSet<Post> Posts { get; set; }
+        public DbSet<PostDto> Posts { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Like> Likes { get; set; }
 
@@ -28,7 +28,7 @@ namespace API.Data
                 .WithMany(l => l.Likes)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            
+
             modelBuilder.Entity<Comment>()
                .HasOne(c => c.User)
                .WithMany(u => u.Comments)

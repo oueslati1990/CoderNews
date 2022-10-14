@@ -16,7 +16,7 @@ namespace API.Data
         {
             _context = context;
         }
-        public async Task CreatePostAsync(Post post)
+        public async Task CreatePostAsync(PostDto post)
         {
             _context.Posts.Add(post);
             await _context.SaveChangesAsync();
@@ -25,16 +25,18 @@ namespace API.Data
         public async Task DeletePostAsync(int id)
         {
             var post = await _context.Posts.FindAsync(id);
+            if (post == null) throw new Exception("No post with this id");
+
             _context.Posts.Remove(post);
             await _context.SaveChangesAsync();
         }
 
-        public async Task<Post> GetPostByIdAsync(int id)
+        public async Task<PostDto> GetPostByIdAsync(int id)
         {
             return await _context.Posts.FindAsync(id);
         }
 
-        public async Task<IEnumerable<Post>> ListPostsAsync()
+        public async Task<IEnumerable<PostDto>> ListPostsAsync()
         {
             return await _context.Posts.ToListAsync();
         }

@@ -8,9 +8,9 @@ namespace API.Interfaces
 {
     public interface IPostsRepository
     {
-        Task<IEnumerable<Post>> ListPostsAsync();
-        Task<Post> GetPostByIdAsync(int id);
+        Task<IEnumerable<PostDto>> ListPostsAsync();
+        Task<PostDto> GetPostByIdAsync(int id);
         Task DeletePostAsync(int id);
-        Task CreatePostAsync(Post post);
+        Task CreatePostAsync(PostDto post);
     }
 }

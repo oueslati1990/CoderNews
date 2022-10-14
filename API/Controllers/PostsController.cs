@@ -28,7 +28,7 @@ namespace API.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Post>>> GetPosts()
+        public async Task<ActionResult<IEnumerable<PostDto>>> GetPosts()
         {
             var result  = await _postsRepo.ListPostsAsync();
             return Ok(result);
@@ -40,9 +40,11 @@ namespace API.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}")]
-        public async Task<ActionResult<IEnumerable<Post>>> GetPostById(int id)
+        public async Task<ActionResult<PostDto>> GetPostById(int id)
         {
             var result = await _postsRepo.GetPostByIdAsync(id);
+            if (result == null) return NotFound();
+
             return Ok(result);
         }
 
@@ -54,7 +56,15 @@ namespace API.Controllers
         [HttpPost("{id}")]
         public async Task<ActionResult> DeletePost(int id)
         {
-            await _postsRepo.DeletePostAsync(id);
+            try
+            {
+                await _postsRepo.DeletePostAsync(id);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            
             return Ok();
         }
 
@@ -66,8 +76,12 @@ namespace API.Controllers
         [HttpPost]
         public async Task<ActionResult> CreatePost([FromBody] PostReqDto postReq)
         {
+            if (!ModelState.IsValid || postReq == null) return BadRequest();
+
             var userReq = await _usersRepo.GetUserAsync(postReq.UserId);
-            var post = new Post
+            if (userReq == null) return NotFound();
+
+            var post = new PostDto
             {
                 Title = postReq.Title,
                 Url = postReq.Url,

@@ -10,7 +10,7 @@ namespace API.Entities
         public int Id { get; set; }
         public AppUser User { get; set; }
         public int AppUserId { get; set; }
-        public Post Post { get; set; }
+        public PostDto Post { get; set; }
         public int PostId { get; set; }
         public string Text { get; set; }
         public string PostedAt { get; set; }

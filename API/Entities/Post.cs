@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace API.Entities
 {
-    public class Post
+    public class PostDto
     {
         public int Id { get; set; }
         public string Title { get; set; }
